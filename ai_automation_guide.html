@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Automation Mastery Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+  :root {
+    --bg: #0a0c10;
+    --surface: #111318;
+    --surface2: #1a1e26;
+    --border: #252932;
+    --accent: #00e5a0;
+    --accent2: #7c6fff;
+    --accent3: #ff6b6b;
+    --accent4: #ffd166;
+    --text: #e8eaf0;
+    --text-muted: #7a8296;
+    --claude: #cc785c;
+    --n8n: #ea4b71;
+    --make: #6366f1;
+    --zapier: #ff4a00;
+    --power: #0078d4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    padding: 100px 40px 80px;
+    text-align: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 40%, rgba(0,229,160,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 80% 60%, rgba(124,111,255,0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(0,229,160,0.12);
+    border: 1px solid rgba(0,229,160,0.3);
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+    font-family: 'Syne', sans-serif;
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(38px, 6vw, 72px);
+    font-weight: 800;
+    line-height: 1.05;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, #fff 0%, var(--accent) 60%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 620px;
+    margin: 0 auto 40px;
+    font-weight: 300;
+  }
+
+  .tool-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .pill {
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Syne', sans-serif;
+    letter-spacing: 0.5px;
+  }
+
+  .pill-claude  { background: rgba(204,120,92,0.18);  border: 1px solid rgba(204,120,92,0.4);  color: #e8956c; }
+  .pill-n8n     { background: rgba(234,75,113,0.18);  border: 1px solid rgba(234,75,113,0.4);  color: #f07090; }
+  .pill-make    { background: rgba(99,102,241,0.18);  border: 1px solid rgba(99,102,241,0.4);  color: #a5a8ff; }
+  .pill-zapier  { background: rgba(255,74,0,0.18);    border: 1px solid rgba(255,74,0,0.4);    color: #ff8c5a; }
+  .pill-power   { background: rgba(0,120,212,0.18);   border: 1px solid rgba(0,120,212,0.4);   color: #5ab4ff; }
+
+  /* ── LAYOUT ── */
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ── TABLE OF CONTENTS ── */
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 36px;
+    margin: 48px 0;
+  }
+
+  .toc h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+
+  .toc-list { list-style: none; }
+  .toc-list li { margin-bottom: 6px; }
+  .toc-list a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 15px;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .toc-list a:hover { color: var(--accent); }
+  .toc-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    color: var(--border);
+    min-width: 24px;
+  }
+
+  .toc-group { margin-bottom: 16px; }
+  .toc-group-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--border);
+    margin-bottom: 8px;
+    font-family: 'Syne', sans-serif;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    margin: 56px 0;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .section-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    color: var(--text-muted);
+    padding-top: 6px;
+    min-width: 32px;
+  }
+
+  h2.section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(24px, 4vw, 34px);
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 32px 0 12px;
+    color: #fff;
+  }
+
+  h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 24px 0 10px;
+  }
+
+  p { margin-bottom: 16px; color: #c8cad6; }
+
+  /* ── TOOL CARDS ── */
+  .tool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .tool-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tool-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+
+  .tool-card:hover { transform: translateY(-2px); }
+
+  .tool-card.claude::before { background: var(--claude); }
+  .tool-card.claude:hover { border-color: rgba(204,120,92,0.4); }
+  .tool-card.n8n::before   { background: var(--n8n); }
+  .tool-card.n8n:hover     { border-color: rgba(234,75,113,0.4); }
+  .tool-card.make::before  { background: var(--make); }
+  .tool-card.make:hover    { border-color: rgba(99,102,241,0.4); }
+  .tool-card.zapier::before{ background: var(--zapier); }
+  .tool-card.zapier:hover  { border-color: rgba(255,74,0,0.4); }
+  .tool-card.power::before { background: var(--power); }
+  .tool-card.power:hover   { border-color: rgba(0,120,212,0.4); }
+
+  .tool-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .tool-card h3 {
+    font-size: 16px;
+    margin: 0 0 6px;
+  }
+
+  .tool-card p { font-size: 13px; color: var(--text-muted); margin: 0 0 12px; }
+
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--surface2);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    font-weight: 500;
+  }
+
+  /* ── CALLOUT BOXES ── */
+  .callout {
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 24px 0;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .callout-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .callout-body h4 { margin: 0 0 6px; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
+  .callout-body p  { margin: 0; font-size: 14px; }
+
+  .callout.tip    { background: rgba(0,229,160,0.07);  border: 1px solid rgba(0,229,160,0.2); }
+  .callout.tip h4 { color: var(--accent); }
+  .callout.warn   { background: rgba(255,209,102,0.07); border: 1px solid rgba(255,209,102,0.2); }
+  .callout.warn h4{ color: var(--accent4); }
+  .callout.idea   { background: rgba(124,111,255,0.07); border: 1px solid rgba(124,111,255,0.2); }
+  .callout.idea h4{ color: var(--accent2); }
+  .callout.sell   { background: rgba(255,107,107,0.07); border: 1px solid rgba(255,107,107,0.2); }
+  .callout.sell h4{ color: var(--accent3); }
+
+  /* ── STEPS ── */
+  .steps { margin: 24px 0; }
+  .step {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+
+  .step::after {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 44px;
+    bottom: -28px;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .step:last-child::after { display: none; }
+
+  .step-num {
+    width: 40px; height: 40px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+    color: var(--accent);
+  }
+
+  .step-content h3 { margin: 8px 0 8px; font-size: 16px; }
+  .step-content p  { font-size: 14px; margin: 0; }
+
+  /* ── CODE BLOCKS ── */
+  .code-block {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 22px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: #a8d8a8;
+    margin: 16px 0;
+    overflow-x: auto;
+    line-height: 1.8;
+    position: relative;
+  }
+
+  .code-label {
+    position: absolute;
+    top: 10px; right: 12px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-family: 'Syne', sans-serif;
+  }
+
+  .code-block .comment { color: #586e75; }
+  .code-block .key     { color: #268bd2; }
+  .code-block .val     { color: #2aa198; }
+  .code-block .str     { color: #859900; }
+
+  /* ── TABLES ── */
+  .table-wrap { overflow-x: auto; margin: 24px 0; border-radius: 12px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; }
+  thead { background: var(--surface2); }
+  th {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 12px 18px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--border);
+    color: #c8cad6;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+  .badge-free   { background: rgba(0,229,160,0.15); color: var(--accent); }
+  .badge-paid   { background: rgba(255,74,0,0.15);  color: #ff7752; }
+  .badge-both   { background: rgba(124,111,255,0.15); color: #a5a8ff; }
+
+  /* ── ROADMAP TRACK ── */
+  .roadmap {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  @media (max-width: 640px) { .roadmap { grid-template-columns: 1fr; } }
+
+  .roadmap-level {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+    position: relative;
+  }
+
+  .level-tag {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 14px;
+  }
+
+  .level-tag.beginner { background: rgba(0,229,160,0.15); color: var(--accent); }
+  .level-tag.inter    { background: rgba(124,111,255,0.15); color: var(--accent2); }
+  .level-tag.advanced { background: rgba(255,107,107,0.15); color: var(--accent3); }
+
+  .roadmap-level h3 { font-size: 15px; margin: 0 0 10px; }
+  .roadmap-level ul { list-style: none; padding: 0; }
+  .roadmap-level ul li {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 4px 0;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .roadmap-level ul li::before { content: '→'; color: var(--border); }
+
+  /* ── SELL SECTION ── */
+  .sell-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+  }
+
+  .sell-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  .sell-card .price {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--accent3);
+    margin-bottom: 4px;
+  }
+
+  .sell-card h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 0 6px;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .sell-card p { font-size: 12px; color: var(--text-muted); margin: 0; }
+
+  /* ── PROMPT BLOCK ── */
+  .prompt-block {
+    background: rgba(204,120,92,0.05);
+    border: 1px solid rgba(204,120,92,0.2);
+    border-left: 3px solid var(--claude);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    color: #e0c4b5;
+    font-style: italic;
+    line-height: 1.65;
+  }
+
+  .prompt-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--claude);
+    font-family: 'Syne', sans-serif;
+    font-style: normal;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+    margin: 48px 0;
+  }
+
+  /* ── CHECKLIST ── */
+  .checklist { list-style: none; padding: 0; margin: 16px 0; }
+  .checklist li {
+    padding: 8px 0 8px 28px;
+    position: relative;
+    font-size: 14px;
+    color: #c8cad6;
+    border-bottom: 1px solid var(--border);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: '☐';
+    position: absolute;
+    left: 0;
+    color: var(--text-muted);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 24px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  footer strong { color: var(--text); }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: #fff; color: #000; }
+    .hero::before { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Complete Beginner-to-Pro Resource</div>
+  <h1>AI Automation<br>Mastery Guide</h1>
+  <p class="hero-sub">Your zero-to-income roadmap for building AI-powered workflows with the tools that actually matter in 2025.</p>
+  <div class="tool-pills">
+    <span class="pill pill-claude">Claude AI</span>
+    <span class="pill pill-n8n">n8n</span>
+    <span class="pill pill-make">Make.com</span>
+    <span class="pill pill-zapier">Zapier</span>
+    <span class="pill pill-power">Power Automate</span>
+  </div>
+</section>
+
+<div class="page">
+
+  <!-- TOC -->
+  <div class="toc">
+    <h2>📋 Table of Contents</h2>
+    <div class="toc-group">
+      <div class="toc-group-title">Foundation</div>
+      <ul class="toc-list">
+        <li><span class="toc-num">01</span><a href="#what">What Is AI Automation?</a></li>
+        <li><span class="toc-num">02</span><a href="#tools">The 5 Core Tools Explained</a></li>
+        <li><span class="toc-num">03</span><a href="#choose">How to Choose Your First Tool</a></li>
+      </ul>
+    </div>
+    <div class="toc-group">
+      <div class="toc-group-title">Learning Path</div>
+      <ul class="toc-list">
+        <li><span class="toc-num">04</span><a href="#roadmap">Skill Roadmap (Beginner → Advanced)</a></li>
+        <li><span class="toc-num">05</span><a href="#claude">Deep Dive: Claude AI</a></li>
+        <li><span class="toc-num">06</span><a href="#n8n">Deep Dive: n8n</a></li>
+        <li><span class="toc-num">07</span><a href="#make">Deep Dive: Make.com</a></li>
+        <li><span class="toc-num">08</span><a href="#zapier">Deep Dive: Zapier</a></li>
+        <li><span class="toc-num">09</span><a href="#power">Deep Dive: Power Automate</a></li>
+      </ul>
+    </div>
+    <div class="toc-group">
+      <div class="toc-group-title">Building & Selling</div>
+      <ul class="toc-list">
+        <li><span class="toc-num">10</span><a href="#projects">10 Real Automation Projects to Build</a></li>
+        <li><span class="toc-num">11</span><a href="#sell">How to Monetize & Sell on Reddit</a></li>
+        <li><span class="toc-num">12</span><a href="#resources">Free Resources & Communities</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="section" id="what">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">What Is AI Automation?</h2>
+    </div>
+
+    <p>AI Automation is the practice of connecting apps, services, and AI models so they work together automatically — without you having to manually trigger each step. Think of it as building a digital employee that handles repetitive tasks around the clock.</p>
+
+    <p>In 2025, the gap between someone who knows automation and someone who doesn't is measured in <strong>hours per day</strong>. People are charging $500–$5,000 to build simple workflows that take a few hours to create once you know the tools.</p>
+
+    <h3>Two Types of Automation You Need to Know</h3>
+
+    <div class="tool-grid">
+      <div class="tool-card" style="border-color: rgba(0,229,160,0.3);">
+        <span class="tool-icon">⚙️</span>
+        <h3>Traditional Automation</h3>
+        <p>Rule-based "if X then Y" logic. Connects apps and moves data on a schedule or trigger. Predictable and reliable.</p>
+        <div class="tag-row">
+          <span class="tag">Zapier</span><span class="tag">Make.com</span><span class="tag">n8n</span>
+        </div>
+      </div>
+      <div class="tool-card" style="border-color: rgba(124,111,255,0.3);">
+        <span class="tool-icon">🧠</span>
+        <h3>AI-Enhanced Automation</h3>
+        <p>Uses language models to understand context, generate content, classify data, and make decisions within your workflows.</p>
+        <div class="tag-row">
+          <span class="tag">Claude</span><span class="tag">GPT-4</span><span class="tag">All tools above</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <span class="callout-icon">💡</span>
+      <div class="callout-body">
+        <h4>The Power Move</h4>
+        <p>The real opportunity is combining both — use Claude to process and reason, then use n8n/Make/Zapier to connect it to the real world. This combo is what clients pay the most for.</p>
+      </div>
+    </div>
+
+    <h3>Real-World Examples</h3>
+    <p>Before diving into tools, here are concrete things automation can do today:</p>
+
+    <ul style="list-style: none; padding: 0; margin: 16px 0;">
+      <li style="padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; color: #c8cad6;">📧 Automatically respond to emails with AI-generated, context-aware replies</li>
+      <li style="padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; color: #c8cad6;">📊 Pull data from a form → Claude summarises it → drops it in Notion or Google Sheets</li>
+      <li style="padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; color: #c8cad6;">🛒 New Shopify order → AI writes a personalised thank-you → sends via SMS/email</li>
+      <li style="padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; color: #c8cad6;">📝 Record a voice memo → transcribe → Claude turns it into a structured blog post</li>
+      <li style="padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; color: #c8cad6;">🤖 24/7 customer support bot on your website that escalates complex queries to humans</li>
+      <li style="padding: 10px 0; font-size: 14px; color: #c8cad6;">📱 Scrape competitor prices weekly → format as report → email to your team</li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 2 -->
+  <div class="section" id="tools">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">The 5 Core Tools Explained</h2>
+    </div>
+
+    <p>Each tool has its own strengths, pricing, and ideal use cases. Here's your complete overview before we go deep on each one.</p>
+
+    <div class="tool-grid">
+      <div class="tool-card claude">
+        <span class="tool-icon">🤖</span>
+        <h3 style="color: #e8956c;">Claude AI</h3>
+        <p>Anthropic's AI assistant. The "brain" of your automation — handles understanding, writing, reasoning, and decision-making inside your workflows.</p>
+        <div class="tag-row">
+          <span class="tag">API Access</span><span class="tag">Best Reasoning</span><span class="tag">Safe for Business</span>
+        </div>
+      </div>
+
+      <div class="tool-card n8n">
+        <span class="tool-icon">🔄</span>
+        <h3 style="color: #f07090;">n8n</h3>
+        <p>Open-source automation platform. Self-host for free or use their cloud. Most flexible tool — if you can code a little, it's incredibly powerful.</p>
+        <div class="tag-row">
+          <span class="tag">Open Source</span><span class="tag">Self-hostable</span><span class="tag">Developer-friendly</span>
+        </div>
+      </div>
+
+      <div class="tool-card make">
+        <span class="tool-icon">🎯</span>
+        <h3 style="color: #a5a8ff;">Make.com</h3>
+        <p>Visual drag-and-drop automation. Excellent UI, generous free tier, great for complex multi-step workflows without coding.</p>
+        <div class="tag-row">
+          <span class="tag">Visual Builder</span><span class="tag">1000+ apps</span><span class="tag">Great free tier</span>
+        </div>
+      </div>
+
+      <div class="tool-card zapier">
+        <span class="tool-icon">⚡</span>
+        <h3 style="color: #ff8c5a;">Zapier</h3>
+        <p>The most popular automation tool. Easiest to learn, most integrations, massive community. Best for beginners and simple workflows.</p>
+        <div class="tag-row">
+          <span class="tag">7,000+ Apps</span><span class="tag">Easiest to Start</span><span class="tag">Largest Community</span>
+        </div>
+      </div>
+
+      <div class="tool-card power">
+        <span class="tool-icon">🏢</span>
+        <h3 style="color: #5ab4ff;">Power Automate</h3>
+        <p>Microsoft's enterprise automation tool. Best for businesses using the Microsoft 365 ecosystem (Outlook, Teams, SharePoint, Excel).</p>
+        <div class="tag-row">
+          <span class="tag">Enterprise</span><span class="tag">Microsoft 365</span><span class="tag">Free with M365</span>
+        </div>
+      </div>
+    </div>
+
+    <h3>Side-by-Side Comparison</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Tool</th>
+            <th>Best For</th>
+            <th>Pricing</th>
+            <th>Difficulty</th>
+            <th>Coding Required</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color:#e8956c;">Claude API</strong></td>
+            <td>AI reasoning inside workflows</td>
+            <td><span class="badge badge-paid">Pay per use</span></td>
+            <td>⭐⭐</td>
+            <td>Optional (API calls)</td>
+          </tr>
+          <tr>
+            <td><strong style="color:#f07090;">n8n</strong></td>
+            <td>Complex, custom automations</td>
+            <td><span class="badge badge-both">Free / €20+</span></td>
+            <td>⭐⭐⭐</td>
+            <td>Optional (JS nodes)</td>
+          </tr>
+          <tr>
+            <td><strong style="color:#a5a8ff;">Make.com</strong></td>
+            <td>Visual multi-step workflows</td>
+            <td><span class="badge badge-both">Free / $9+</span></td>
+            <td>⭐⭐</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td><strong style="color:#ff8c5a;">Zapier</strong></td>
+            <td>Quick simple automations</td>
+            <td><span class="badge badge-both">Free / $19.99+</span></td>
+            <td>⭐</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td><strong style="color:#5ab4ff;">Power Automate</strong></td>
+            <td>Microsoft ecosystem</td>
+            <td><span class="badge badge-both">Free (M365) / $15</span></td>
+            <td>⭐⭐</td>
+            <td>No</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 3 -->
+  <div class="section" id="choose">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">How to Choose Your First Tool</h2>
+    </div>
+
+    <p>Don't try to learn all five at once. Here's a decision framework based on your situation:</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Start with Zapier — if you just want results fast</h3>
+          <p>Zero learning curve. Connect two apps in 10 minutes. Great for: email → spreadsheet, form → Slack notification, social media scheduling. Move to Make or n8n once you hit Zapier's limits.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Start with Make.com — if you want visual power without cost</h3>
+          <p>More capable than Zapier, still no-code, and the free tier allows 1,000 operations/month. Better for multi-branch logic, loops, and complex data transformation.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Start with n8n — if you're technical or want to resell services</h3>
+          <p>Self-host on a $5/month VPS and run unlimited workflows for near zero cost. This is the tool that lets you build agencies around automation since your margins stay high.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>Start with Power Automate — if your workplace uses Microsoft</h3>
+          <p>If you're in a company running Teams, SharePoint, and Outlook, Power Automate is already available to you and the most politically easy to deploy internally.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h3>Add Claude — as soon as your workflows need intelligence</h3>
+          <p>Claude plugs into any of the above tools via the Anthropic API. Once you need text generation, classification, summarization, or smart decision-making in your flows, Claude is your first stop.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 4 -->
+  <div class="section" id="roadmap">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Skill Roadmap</h2>
+    </div>
+
+    <p>Follow this track regardless of which tool you start with. The concepts transfer between all platforms.</p>
+
+    <div class="roadmap">
+      <div class="roadmap-level">
+        <span class="level-tag beginner">Beginner · Weeks 1–4</span>
+        <h3>Foundation</h3>
+        <ul>
+          <li>Understand triggers vs actions</li>
+          <li>Build your first Zap/Scenario</li>
+          <li>Connect 2–3 common apps</li>
+          <li>Use filters & conditions</li>
+          <li>Handle basic data mapping</li>
+          <li>Set up test vs live modes</li>
+          <li>Read API documentation</li>
+        </ul>
+      </div>
+      <div class="roadmap-level">
+        <span class="level-tag inter">Intermediate · Months 2–4</span>
+        <h3>Builder</h3>
+        <ul>
+          <li>Multi-step complex flows</li>
+          <li>Error handling & retries</li>
+          <li>Webhook triggers</li>
+          <li>Make your first API call</li>
+          <li>Connect Claude to a workflow</li>
+          <li>Build loops and iterators</li>
+          <li>Work with JSON data</li>
+          <li>Schedule & automate reports</li>
+        </ul>
+      </div>
+      <div class="roadmap-level">
+        <span class="level-tag advanced">Advanced · Month 5+</span>
+        <h3>Expert</h3>
+        <ul>
+          <li>Build AI agents with memory</li>
+          <li>Multi-model orchestration</li>
+          <li>Custom HTTP nodes</li>
+          <li>Manage client workflows</li>
+          <li>Build workflow templates to sell</li>
+          <li>Self-host n8n / white-label</li>
+          <li>Webhooks + custom backends</li>
+          <li>Document & sell as a service</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <span class="callout-icon">🎯</span>
+      <div class="callout-body">
+        <h4>Learning Strategy That Works</h4>
+        <p>Pick one real problem in your own life or business and solve it. Don't do tutorial after tutorial without building. The moment you struggle with a real workflow, you learn 10x faster.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 5 — CLAUDE -->
+  <div class="section" id="claude">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title" style="color:#e8956c;">Deep Dive: Claude AI</h2>
+    </div>
+
+    <p>Claude is built by Anthropic and is widely regarded as one of the best models for complex reasoning, long-context understanding, and safe, reliable responses for business use. It's your primary AI "brain" inside any automation workflow.</p>
+
+    <h3>Getting Started with Claude</h3>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Create an Anthropic Account</h3>
+          <p>Go to <strong>console.anthropic.com</strong> → Sign up → Add a payment method. You get $5 of free credits to start. Most beginner projects cost less than $1 to run.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Generate Your API Key</h3>
+          <p>In the console, go to <strong>API Keys → Create Key</strong>. Copy it immediately — it only shows once. Store it in a password manager or environment variable, never in your code directly.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Make Your First API Call</h3>
+          <p>You can call Claude from n8n, Make, Zapier (via HTTP Request), or directly from code. Here's the simplest possible request:</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <span class="code-label">HTTP Request (works in any tool)</span>
+<span class="key">POST</span> https://api.anthropic.com/v1/messages
+
+<span class="comment">// Headers</span>
+x-api-key: your-api-key-here
+anthropic-version: 2023-06-01
+content-type: application/json
+
+<span class="comment">// Body</span>
+{
+  <span class="str">"model"</span>: <span class="val">"claude-opus-4-5"</span>,
+  <span class="str">"max_tokens"</span>: <span class="val">1024</span>,
+  <span class="str">"messages"</span>: [
+    {
+      <span class="str">"role"</span>: <span class="val">"user"</span>,
+      <span class="str">"content"</span>: <span class="val">"Summarize this email in 3 bullet points: {{email_body}}"</span>
+    }
+  ]
+}
+    </div>
+
+    <h3>Claude Models — Which One to Use</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Model</th><th>Best Use</th><th>Speed</th><th>Cost</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Claude Haiku 3.5</strong></td>
+            <td>High-volume simple tasks (classification, extraction)</td>
+            <td>⚡⚡⚡ Fastest</td>
+            <td>Cheapest</td>
+          </tr>
+          <tr>
+            <td><strong>Claude Sonnet 4.6</strong></td>
+            <td>Most everyday tasks — great balance of speed + quality</td>
+            <td>⚡⚡ Fast</td>
+            <td>Mid-range</td>
+          </tr>
+          <tr>
+            <td><strong>Claude Opus 4.6</strong></td>
+            <td>Complex analysis, nuanced writing, difficult reasoning</td>
+            <td>⚡ Slower</td>
+            <td>Premium</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Prompt Templates for Automation</h3>
+    <p>The quality of your automation output depends almost entirely on your prompts. Here are battle-tested templates:</p>
+
+    <h4>Email Classifier</h4>
+    <div class="prompt-block">
+      <span class="prompt-label">System Prompt</span>
+      You are an email classifier for a customer support team. Classify each email into exactly one of: BILLING, TECHNICAL, SALES, COMPLAINT, OTHER. Respond with only the category name, nothing else.
+    </div>
+
+    <h4>Data Extractor</h4>
+    <div class="prompt-block">
+      <span class="prompt-label">System Prompt</span>
+      Extract structured data from the provided text. Return ONLY valid JSON with these exact keys: "name", "email", "phone", "company". If a field is not found, use null. No explanation, no markdown, just the JSON object.
+    </div>
+
+    <h4>Content Transformer</h4>
+    <div class="prompt-block">
+      <span class="prompt-label">System Prompt</span>
+      You are a professional copywriter. Transform the provided raw notes into a polished LinkedIn post. Use an engaging first line, 3-5 key insights as short paragraphs, and end with a question. Max 300 words. No hashtag spam.
+    </div>
+
+    <div class="callout warn">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-body">
+        <h4>Prompt Engineering Tips</h4>
+        <p>Always use a system prompt to set the role. Be specific about output format (JSON, bullet points, etc.). Tell Claude what NOT to do. Test with edge cases before going live.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 6 — N8N -->
+  <div class="section" id="n8n">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2 class="section-title" style="color:#f07090;">Deep Dive: n8n</h2>
+    </div>
+
+    <p>n8n (pronounced "n-eight-n") is the most powerful open-source automation tool available. It has a visual node-based interface but lets you drop into JavaScript when you need full control. The biggest advantage: <strong>self-host it and pay almost nothing for unlimited workflows</strong>.</p>
+
+    <h3>Setting Up n8n (Two Ways)</h3>
+
+    <div class="tool-grid" style="grid-template-columns: 1fr 1fr;">
+      <div class="tool-card n8n">
+        <h3>☁️ n8n Cloud</h3>
+        <p>Sign up at n8n.io. Free trial, then paid plans from €20/month. Easiest to start — no setup needed.</p>
+        <div class="tag-row"><span class="tag">Best for beginners</span><span class="tag">Managed</span></div>
+      </div>
+      <div class="tool-card n8n">
+        <h3>🖥️ Self-Hosted</h3>
+        <p>Run on a $5/month VPS (Railway, Render, DigitalOcean). Completely free, unlimited everything. Best for building a business.</p>
+        <div class="tag-row"><span class="tag">For agencies</span><span class="tag">Near-zero cost</span></div>
+      </div>
+    </div>
+
+    <h3>Key Concepts in n8n</h3>
+
+    <h4>Nodes</h4>
+    <p>Each block in your workflow is a "node." There are trigger nodes (start the workflow), action nodes (do something), and utility nodes (transform data).</p>
+
+    <h4>Workflows</h4>
+    <p>A chain of connected nodes. Data flows from left to right. Each node receives the output of the previous one and passes its own output forward.</p>
+
+    <h4>Expressions</h4>
+    <p>Reference data from earlier nodes using <code style="background: var(--surface2); padding: 2px 6px; border-radius: 4px; font-size: 13px;">{{ $json.email }}</code> syntax. This is how you pass customer email from step 1 into a Claude prompt in step 5.</p>
+
+    <h3>Building a Claude + n8n Workflow</h3>
+    <p>Example: Automatically classify and route incoming support tickets</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Webhook Trigger</h3>
+          <p>Add a <strong>Webhook node</strong>. n8n gives you a URL. Your form/app sends tickets here. Test it by submitting a sample ticket.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>HTTP Request Node → Claude API</h3>
+          <p>Add an <strong>HTTP Request node</strong>. Method: POST. URL: Claude API endpoint. Add your API key to headers. In the body, use <code style="background: var(--surface2); padding: 2px 6px; border-radius: 4px; font-size: 12px;">{{ $json.ticket_text }}</code> in your prompt.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Switch Node</h3>
+          <p>Add a <strong>Switch node</strong>. Parse Claude's response (the category). Create a branch for BILLING, TECHNICAL, etc. Each branch routes to a different action.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>Action Nodes</h3>
+          <p>Each branch triggers an action: create a Jira ticket, send a Slack message to the right channel, or add a row to a Google Sheet. Set and forget.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout idea">
+      <span class="callout-icon">🌟</span>
+      <div class="callout-body">
+        <h4>n8n Agency Opportunity</h4>
+        <p>Self-host n8n on a $5/month server, charge clients $200–$500/month for "workflow maintenance." Your actual cost: $5. Your margin: 97%+. Many freelancers do exactly this with 10–20 clients.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 7 — MAKE -->
+  <div class="section" id="make">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2 class="section-title" style="color:#a5a8ff;">Deep Dive: Make.com</h2>
+    </div>
+
+    <p>Make (formerly Integromat) is the visual automation tool that strikes the perfect balance between power and accessibility. Its canvas-based interface makes complex multi-branch workflows easy to understand at a glance.</p>
+
+    <h3>Getting Started</h3>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Create Your Free Account</h3>
+          <p>Go to make.com → Sign up free. The free tier gives you 1,000 operations/month — enough to run most personal projects and test client ideas.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Create Your First Scenario</h3>
+          <p>Make calls workflows "Scenarios." Click <strong>Create a new scenario</strong> → add a trigger module (e.g., Gmail "Watch emails") → add action modules to respond to each trigger.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Connect Modules with Data</h3>
+          <p>Click on a field in any module and select data from previous modules. Make shows you exactly what data is available as you map it — much friendlier than code.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>Test & Schedule</h3>
+          <p>Hit <strong>Run once</strong> to test with real data. Once satisfied, turn on scheduling (every 15 min, hourly, daily) or activate instant triggers.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Make's Superpower: Routers</h3>
+    <p>Make's Router module splits one data stream into multiple paths based on conditions — like a railway switch. This is where Make shines over simpler tools. Build one scenario that handles 10 different types of input, each routed to its own logic chain.</p>
+
+    <h3>Using Claude Inside Make</h3>
+    <p>Make has a built-in <strong>Claude / Anthropic</strong> module — no manual HTTP setup needed. Simply search for "Claude" in the module list, authenticate with your API key, and you'll have a drag-and-drop Claude step available in any scenario.</p>
+
+    <div class="callout tip">
+      <span class="callout-icon">🎯</span>
+      <div class="callout-body">
+        <h4>Make Pro Tip: Scenario Templates</h4>
+        <p>Make has hundreds of free templates in their template library. Always check there first. Duplicate a template, modify it for your use case, and you've saved hours of setup work.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 8 — ZAPIER -->
+  <div class="section" id="zapier">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <h2 class="section-title" style="color:#ff8c5a;">Deep Dive: Zapier</h2>
+    </div>
+
+    <p>Zapier is the tool that got millions of people into automation. It's the most beginner-friendly, has the largest library of app integrations (7,000+), and its "Zap" structure (trigger → action) is intuitive for anyone.</p>
+
+    <h3>The Zap Structure</h3>
+
+    <div class="tool-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+      <div class="tool-card" style="text-align: center;">
+        <span style="font-size:36px;">⚡</span>
+        <h3>Trigger</h3>
+        <p>"Something happens in App A"<br><em>New email, form submission, new row in sheet…</em></p>
+      </div>
+      <div class="tool-card" style="text-align: center;">
+        <span style="font-size:36px;">🔀</span>
+        <h3>Filter / Logic</h3>
+        <p>"Only continue if…"<br><em>Condition is met, value matches…</em></p>
+      </div>
+      <div class="tool-card" style="text-align: center;">
+        <span style="font-size:36px;">✅</span>
+        <h3>Action(s)</h3>
+        <p>"Do this in App B"<br><em>Send Slack msg, add to CRM, create task…</em></p>
+      </div>
+    </div>
+
+    <h3>Your First 5 Zaps to Build</h3>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Zap</th><th>Trigger</th><th>Action</th><th>Use Case</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Lead Capture</strong></td>
+            <td>New Typeform submission</td>
+            <td>Add row to Google Sheets + Slack notify</td>
+            <td>Never miss a lead</td>
+          </tr>
+          <tr>
+            <td><strong>Email to Task</strong></td>
+            <td>Gmail starred email</td>
+            <td>Create Trello/Asana card</td>
+            <td>Action inbox without context switching</td>
+          </tr>
+          <tr>
+            <td><strong>Social Repurpose</strong></td>
+            <td>New blog post (RSS)</td>
+            <td>Create Buffer/Hootsuite post draft</td>
+            <td>Effortless content distribution</td>
+          </tr>
+          <tr>
+            <td><strong>AI Email Draft</strong></td>
+            <td>New Gmail email</td>
+            <td>Claude generates draft → Gmail draft</td>
+            <td>AI-assisted email responses</td>
+          </tr>
+          <tr>
+            <td><strong>Meeting Notes</strong></td>
+            <td>Calendly booking confirmed</td>
+            <td>Create Notion prep page</td>
+            <td>Always be prepared for calls</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Zapier AI Actions (2024+)</h3>
+    <p>Zapier now has native AI steps including a "Claude by Anthropic" action and its own AI step. You can also use the <strong>Formatter by Zapier</strong> AI step to transform text without needing your own API key — useful for beginners before they set up their own Claude access.</p>
+
+    <div class="callout warn">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-body">
+        <h4>Zapier Pricing Reality Check</h4>
+        <p>Zapier's free tier only allows 100 tasks/month and basic Zaps. Once you hit limits or need multi-step Zaps, the $19.99/month paid plan kicks in fast. For high volume or client work, Make.com or n8n will save you significant money.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 9 — POWER AUTOMATE -->
+  <div class="section" id="power">
+    <div class="section-header">
+      <span class="section-num">09</span>
+      <h2 class="section-title" style="color:#5ab4ff;">Deep Dive: Power Automate</h2>
+    </div>
+
+    <p>Microsoft Power Automate (formerly Flow) is the enterprise-grade automation tool built into the Microsoft 365 ecosystem. If you're in a corporate environment, this is often already available to you for free as part of your subscription.</p>
+
+    <h3>Three Types of Flows</h3>
+
+    <div class="tool-grid">
+      <div class="tool-card power">
+        <span class="tool-icon">⚡</span>
+        <h3>Automated Flows</h3>
+        <p>Triggered by an event: new email, SharePoint file added, Teams message. Runs without you doing anything.</p>
+      </div>
+      <div class="tool-card power">
+        <span class="tool-icon">🖱️</span>
+        <h3>Instant Flows</h3>
+        <p>You trigger it manually from your phone, desktop, or a button in Teams. Great for tasks you do on-demand.</p>
+      </div>
+      <div class="tool-card power">
+        <span class="tool-icon">🕐</span>
+        <h3>Scheduled Flows</h3>
+        <p>Runs on a schedule: daily reports, weekly cleanups, monthly data exports. Set it and forget it.</p>
+      </div>
+    </div>
+
+    <h3>High-Value Power Automate Workflows</h3>
+
+    <ul class="checklist">
+      <li>Approval workflows — send document for manager approval, update SharePoint on decision</li>
+      <li>Auto-populate Excel from form responses (Microsoft Forms → Excel)</li>
+      <li>Daily standup digest — collect from multiple channels, summarize with AI Copilot, post to Teams</li>
+      <li>Out-of-office auto-responder with intelligent routing to team members</li>
+      <li>SharePoint document processing — extract data, classify with AI, move to correct folder</li>
+      <li>Scheduled report generation from Power BI data sent via email</li>
+    </ul>
+
+    <h3>Adding AI to Power Automate</h3>
+    <p>Power Automate integrates with <strong>Azure OpenAI</strong> natively, and you can also use the <strong>HTTP action</strong> to call Claude's API. For enterprise environments, Azure OpenAI is often preferred due to data residency compliance, but Claude's API is perfectly usable and often produces better results.</p>
+
+    <h4>AI Builder</h4>
+    <p>Microsoft's built-in AI toolkit inside Power Automate. Pre-built models for document processing, text classification, object detection, and sentiment analysis — all without writing any code. Great for corporates that can't use external APIs.</p>
+
+    <div class="callout idea">
+      <span class="callout-icon">💼</span>
+      <div class="callout-body">
+        <h4>Corporate Opportunity</h4>
+        <p>Most companies have Power Automate available but nobody uses it well. Learning Power Automate and offering to build internal automations is a high-value skill inside large companies — it can lead to promotions, raises, or consulting contracts.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 10 — PROJECTS -->
+  <div class="section" id="projects">
+    <div class="section-header">
+      <span class="section-num">10</span>
+      <h2 class="section-title">10 Real Projects to Build</h2>
+    </div>
+
+    <p>The best way to learn is to build. Here are 10 progressively complex projects — each one teaches different skills and produces something genuinely useful.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Project</th><th>Tools</th><th>Difficulty</th><th>What You Learn</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><strong>Email-to-Notion Log</strong></td>
+            <td>Zapier + Notion</td>
+            <td>⭐</td>
+            <td>Basic triggers, database writes</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><strong>AI Email Summarizer</strong></td>
+            <td>Make + Claude</td>
+            <td>⭐⭐</td>
+            <td>First Claude API call, data mapping</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><strong>Social Media Auto-Poster</strong></td>
+            <td>n8n + Buffer</td>
+            <td>⭐⭐</td>
+            <td>Scheduling, RSS feeds, multiple outputs</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><strong>Lead Qualifier Bot</strong></td>
+            <td>Make + Claude + Gmail</td>
+            <td>⭐⭐⭐</td>
+            <td>Conditional logic, AI scoring, email sending</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><strong>Invoice Data Extractor</strong></td>
+            <td>n8n + Claude + Google Drive</td>
+            <td>⭐⭐⭐</td>
+            <td>File processing, structured data extraction</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><strong>Customer Support Chatbot</strong></td>
+            <td>n8n + Claude + Webhook</td>
+            <td>⭐⭐⭐</td>
+            <td>Webhooks, conversation memory, escalation</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><strong>Daily Business Report</strong></td>
+            <td>n8n + Airtable + Claude + Gmail</td>
+            <td>⭐⭐⭐</td>
+            <td>Multi-source aggregation, AI synthesis</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><strong>Content Repurposer</strong></td>
+            <td>Make + Claude + Notion</td>
+            <td>⭐⭐⭐</td>
+            <td>Long-form AI content generation, multi-output</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><strong>Competitor Monitor</strong></td>
+            <td>n8n + Scraper + Claude</td>
+            <td>⭐⭐⭐⭐</td>
+            <td>Web scraping, change detection, AI analysis</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><strong>AI Employee Onboarding</strong></td>
+            <td>Power Automate + Claude</td>
+            <td>⭐⭐⭐⭐</td>
+            <td>Complex approval flows, document generation</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout tip">
+      <span class="callout-icon">📚</span>
+      <div class="callout-body">
+        <h4>Portfolio Tip</h4>
+        <p>Document each project as a case study: problem → solution → results (time saved, error reduction). These case studies are what you show on Reddit and to clients. They're worth more than any certification.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 11 — SELL -->
+  <div class="section" id="sell">
+    <div class="section-header">
+      <span class="section-num">11</span>
+      <h2 class="section-title">How to Monetize & Sell on Reddit</h2>
+    </div>
+
+    <p>Reddit is one of the best platforms for selling digital guides and automation services because the communities are deeply engaged and value expertise over follower counts. Here's the full playbook.</p>
+
+    <h3>The Products You Can Sell</h3>
+
+    <div class="sell-grid">
+      <div class="sell-card">
+        <div class="price">$7–$29</div>
+        <h4>Starter Guides</h4>
+        <p>"Beginner's Guide to n8n" or "Make.com for Freelancers" — simple, focused, high value.</p>
+      </div>
+      <div class="sell-card">
+        <div class="price">$29–$97</div>
+        <h4>Workflow Templates</h4>
+        <p>Exportable n8n/Make scenarios with setup guides. People pay for working templates they can customise.</p>
+      </div>
+      <div class="sell-card">
+        <div class="price">$97–$297</div>
+        <h4>Full Courses</h4>
+        <p>Video walkthroughs of building 10+ real automations from scratch with a defined learning outcome.</p>
+      </div>
+      <div class="sell-card">
+        <div class="price">$500–$5k</div>
+        <h4>Done-For-You</h4>
+        <p>Build and set up automations for clients. One project can equal months of digital product sales.</p>
+      </div>
+    </div>
+
+    <h3>Reddit Strategy That Actually Works</h3>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Identify Your Subreddits</h3>
+          <p>Primary: <strong>r/automation</strong>, <strong>r/nocode</strong>, <strong>r/n8n</strong>, <strong>r/zapier</strong>, <strong>r/AIAssistants</strong>, <strong>r/SideProject</strong>. Secondary: <strong>r/Entrepreneur</strong>, <strong>r/freelance</strong>, <strong>r/digitalnomad</strong>.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Give Before You Sell — Always</h3>
+          <p>Post a genuinely useful free guide, tutorial, or workflow first. Get upvotes and comments. Build karma and credibility. Then add a soft pitch at the bottom for your paid resources — never lead with the sale.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>The "Show HN / Show Reddit" Post</h3>
+          <p>Post: <em>"I built [X automation] that saves me [Y hours/week]. Here's how I did it for free."</em> Include screenshots, results, and a full breakdown. At the end, mention you have a deeper guide. This post format drives the most organic interest.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>Where to Host & Sell</h3>
+          <p>Use <strong>Gumroad</strong> (lowest friction for buyers), <strong>Lemon Squeezy</strong>, or <strong>Payhip</strong>. These platforms let Reddit users buy with a credit card in 60 seconds — no accounts needed. Link from your Reddit bio too.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h3>The Comment Strategy</h3>
+          <p>Find posts where people ask questions you know the answer to. Give a thorough, helpful answer. Mention at the end: <em>"I cover this in depth in my guide if you want the full workflow."</em> Never spam — be genuinely helpful first.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout sell">
+      <span class="callout-icon">💰</span>
+      <div class="callout-body">
+        <h4>Guide Titles That Sell on Reddit</h4>
+        <p>"How I automated my entire client onboarding with n8n + Claude (free template included)" — "The Make.com workflow that does my bookkeeping: full breakdown" — "I charge $2k for this automation — here's the full build guide" — "Zero to automation in 30 days: the curriculum that actually worked"</p>
+      </div>
+    </div>
+
+    <h3>Pricing Psychology</h3>
+    <p>Reddit users respond best to:</p>
+    <ul class="checklist">
+      <li>Specific outcomes in the title ("saves 3 hours/week" not "great automation tool")</li>
+      <li>Proof before purchase (screenshots, before/after, real numbers)</li>
+      <li>Launch pricing with a deadline ("first 50 buyers get it for $9")</li>
+      <li>Bundles (3 workflow templates for the price of 2)</li>
+      <li>Money-back guarantees (reduces risk, increases conversions dramatically)</li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 12 — RESOURCES -->
+  <div class="section" id="resources">
+    <div class="section-header">
+      <span class="section-num">12</span>
+      <h2 class="section-title">Free Resources & Communities</h2>
+    </div>
+
+    <h3>Official Documentation (Always Start Here)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Resource</th><th>URL</th><th>What's There</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Anthropic Docs</strong></td><td>docs.anthropic.com</td><td>Claude API reference, prompt guides, examples</td></tr>
+          <tr><td><strong>n8n Docs</strong></td><td>docs.n8n.io</td><td>Node reference, tutorials, self-hosting guides</td></tr>
+          <tr><td><strong>Make Academy</strong></td><td>academy.make.com</td><td>Free video courses from beginner to advanced</td></tr>
+          <tr><td><strong>Zapier Learn</strong></td><td>zapier.com/learn</td><td>Guides, tutorials, use case library</td></tr>
+          <tr><td><strong>Power Automate Learn</strong></td><td>learn.microsoft.com/power-automate</td><td>Free Microsoft official courses</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Communities to Join Today</h3>
+
+    <div class="tool-grid">
+      <div class="tool-card" style="border-color: rgba(234,75,113,0.3);">
+        <span class="tool-icon">🔴</span>
+        <h3>Reddit Communities</h3>
+        <p>r/n8n, r/automation, r/nocode, r/zapier, r/AIAssistants — active daily discussion, free help, and inspiration.</p>
+      </div>
+      <div class="tool-card" style="border-color: rgba(99,102,241,0.3);">
+        <span class="tool-icon">💬</span>
+        <h3>Discord Servers</h3>
+        <p>n8n has an official Discord. Make.com and many AI communities have active Discords where you can get help in real time.</p>
+      </div>
+      <div class="tool-card" style="border-color: rgba(0,119,181,0.3);">
+        <span class="tool-icon">📺</span>
+        <h3>YouTube Channels</h3>
+        <p>Search "n8n tutorial 2025", "Make.com beginner", "Claude API automation" — there's a wealth of free video content for every level.</p>
+      </div>
+    </div>
+
+    <h3>Your 30-Day Action Plan</h3>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Week 1: Setup & First Win</h3>
+          <p>Sign up for Make.com free + Claude API. Build the AI email summarizer (Project #2). Share it on Reddit. Get your first feedback.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Week 2: Go Deeper</h3>
+          <p>Build Projects #3 and #4. Join r/automation and r/n8n. Comment on 5 posts where you can genuinely help. Start a simple Gumroad store.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Week 3: Create Your First Guide</h3>
+          <p>Document one of your working automations as a step-by-step guide with screenshots. Price it at $9. Post a free version of step 1 on Reddit with a link to the full guide.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>Week 4: Scale & Refine</h3>
+          <p>Post your results on Reddit (even if small). Build Project #5 or #6. Reach out to 3 small businesses in your network and offer to automate one thing for them free — then upsell the maintenance.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <span class="callout-icon">🚀</span>
+      <div class="callout-body">
+        <h4>Final Reminder</h4>
+        <p>The tools change. The frameworks stay. Learn the underlying concepts — triggers, webhooks, APIs, data transformation, AI prompting — and you'll be able to adapt to any new platform that comes along. Focus on solving real problems, document your work, and the income follows naturally.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p><strong>AI Automation Mastery Guide</strong> · A comprehensive resource for learners, builders, and sellers</p>
+  <p style="margin-top: 8px;">Built with Claude AI · Tools covered: Claude, n8n, Make.com, Zapier, Power Automate</p>
+</footer>
+
+</body>
+</html>
